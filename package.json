@@ -1,0 +1,28 @@
+{
+    "name": "tengo.js",
+    
+    "description": "personal finances manager",
+    
+    "version": "0.0.1",
+    
+    "author": "Ernesto Roldan <jeroldan@gmail.com>",
+
+    "dependencies": {
+        "express" : "2.2.0",
+        "redis" : "0.7.1"
+    },
+
+    "repository": {
+        "type": "git",
+        "url": "https://ubikee@github.com/ubikee/tengo.git"
+    },
+
+    "directories": {
+        "lib": "."
+    },
+
+    "engines": {
+        "node": "*"
+    }
+
+}
