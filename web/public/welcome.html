@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+	<title>Tengo</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="css/bootstrap.css" rel="stylesheet">
+	<style type="text/css">
+		body {
+			padding-top: 40px;
+			padding-bottom: 40px;
+		}
+    </style>
+	<link href="css/bootstrap-responsive.css" rel="stylesheet">
+</head>
+<body>
+
+	<!-- navbar -->
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="brand" href="#">Tengo</a>
+				<div class="nav-collapse collapse">
+					<ul class="nav">
+						<li class="active"><a href="#">Home</a></li>
+						<li><a href="/documentation">Documentation</a></li>
+						<li><a href="/contact">Contact</a></li>
+					</ul>
+					<form class="navbar-form pull-right" method="POST" action="/login">
+						<input class="span2" type="email" placeholder="Email" name="email" required>
+						<input class="span2" type="password" placeholder="Password" name="password" required>
+						<button type="submit" class="btn">Log In</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="container">
+
+		<div class="hero-unit">
+			<h1>Finances under control</h1>
+			<p>Control your money with Tengo!</p>
+			<p><a href="/signup" class="btn btn-primary btn-large">Sign UP !!! &raquo;</a></p>
+		</div>
+
+		<div class="row">
+			<div class="span4">
+				<h2>Inventory</h2>
+				<p>Know your posessions and its real value </p>
+				<p><a class="btn" href="#">View details &raquo;</a></p>
+			</div>
+			<div class="span4">
+				<h2>Contracts</h2>
+				<p>Be aware of your compromises!</p>
+				<p><a class="btn" href="#">View details &raquo;</a></p>
+			</div>
+			<div class="span4">
+				<h2>Statistics</h2>
+				<p>How are you doing? Obtain your rates just in time and get notified of any risk!.</p>
+				<p><a class="btn" href="#">View details &raquo;</a></p>
+			</div>
+		</div>
+
+		<hr>
+
+		<footer>
+			<p>&copy; ubikee 2013</p>
+		</footer>
+
+	</div> <!-- /container -->
+	
+	<script src="http://code.jquery.com/jquery.js"></script>
+	<script src="js/bootstrap-transition.js"></script>
+	<script src="js/bootstrap-alert.js"></script>
+	<script src="js/bootstrap-modal.js"></script>
+	<script src="js/bootstrap-dropdown.js"></script>
+	<script src="js/bootstrap-scrollspy.js"></script>
+	<script src="js/bootstrap-tab.js"></script>
+	<script src="js/bootstrap-tooltip.js"></script>
+	<script src="js/bootstrap-popover.js"></script>
+	<script src="js/bootstrap-button.js"></script>
+	<script src="js/bootstrap-collapse.js"></script>
+	<script src="js/bootstrap-carousel.js"></script>
+	<script src="js/bootstrap-typeahead.js"></script>	
+</body>
+</html>
