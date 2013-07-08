@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+	<title>Tengo: Global Position</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="css/bootstrap.css" rel="stylesheet">
+	<style type="text/css">
+		body {
+			padding-top: 80px;
+			padding-bottom: 40px;
+		}
+    </style>
+	<link href="css/bootstrap-responsive.css" rel="stylesheet">
+
+	<script src="http://smart-ip.net/scripts/com/gauge.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+<body>
+
+	<!-- navbar -->
+	<div class="navbar navbar-fixed-top">
+
+		<div class="navbar-inner">
+			<div class="container">
+				<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse1">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="brand" href="#">Tengo</a>
+				<div class="nav-collapse collapse nav-collapse1">
+					<ul class="nav">
+						<li><a href="/">Home</a></li>
+						<li><a href="/documentation">Documentation</a></li>
+						<li><a href="/contact">Contact</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="navbar-inverse">
+		<div class="navbar-inner">
+			<div class="container">
+				<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse2">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<div class="nav-collapse collapse nav-collapse2" >
+					<ul class="nav">
+						<li class="active"><a href="/resume">Global Position</a></li>
+						<li><a href="/inventory">Inventory</a></li>
+						<li><a href="/contracts">Contracts</a></li>
+						<li><a href="/statistics">Statistics</a></li>
+						<li><a href="/alerts">Alerts</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		</div>
+	</div>
+
+	<div class="container">
+
+		<div class="page-header">
+			<h2>Global Position</h2>
+			<div class="btn-group" data-toggle="buttons-radio">
+				<button type="button" class="btn">This week</button>
+				<button type="button" class="btn active">This Month</button>
+				<button type="button" class="btn">This Year</button>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="span8">
+				<div style="border-bottom: dotted 1px #EEE">
+					<strong>CASH</strong>
+					<span class="label label-success pull-right clearfix">80.000 $</span>
+				</div>
+				<div style="border-bottom: dotted 1px #EEE">
+					<strong>Inventory</strong>
+					<span class="label label-info pull-right clearfix">800.000 $</span>
+				</div>
+				<div style="border-bottom: dotted 1px #EEE">
+					<strong>Expenses</strong>
+					<span class="label label-warning pull-right clearfix">10.000 $</span>
+				</div>
+				<div style="border-bottom: dotted 1px #EEE">
+					<strong>Incoming</strong>
+					<span class="label label-success pull-right clearfix">3.000 $</span>
+				</div>
+				<div style="border-bottom: dotted 1px #EEE">
+					<strong>Scheduled</strong>
+					<span class="label label-warning pull-right clearfix">1.000 $</span>
+				</div>
+				<div style="border-bottom: dotted 1px #EEE">
+					<strong>Unexpected</strong>
+					<span class="label label-important pull-right clearfix">500 $</span>
+				</div>
+			</div>
+			<div class="span4">
+				<center>
+					<canvas id="gauge1" width="150" height="150"></canvas>
+				</center>
+			</div>
+		</div>
+
+		<hr>
+
+		<div class="row">
+			<div class="span6">
+				<h4>Expenses</h4>
+				<div>
+					<small>Mortage</small>
+					<span class="label label-warning pull-right clearfix">800 $</span>
+				</div>
+				<div>
+					<small>Gasoline</small>
+					<span class="label label-success pull-right clearfix">400 $</span>
+				</div>
+				<div>
+					<small>Electricity</small>
+					<span class="label label-success pull-right clearfix">100 $</span>
+				</div>
+				<div>
+					<small>Shopping</small>
+					<span class="label label-success pull-right clearfix">300 $</span>
+				</div>
+			</div>
+
+			<div class="span6">
+				<h4 class="text-right">Incomes</h4>
+				<div style="border-bottom: dotted 1px #EEE">
+					<span class="label label-success">2.000 $</span>
+					<span class="pull-right clearfix"><small>My Job</small></span>
+				</div>
+				<div style="border-bottom: dotted 1px #EEE">
+					<span class="label label-success">5.00 $</span>
+					<span class="pull-right clearfix"><small>House2 Renting</small></span>
+				</div>
+			</div>
+
+		</div>
+		
+		<footer>
+			<p>&copy; ubikee 2013</p>
+		</footer>
+
+	</div> <!-- /container -->
+
+	<script src="http://code.jquery.com/jquery.js"></script>
+	<script src="js/bootstrap-transition.js"></script>
+	<script src="js/bootstrap-alert.js"></script>
+	<script src="js/bootstrap-modal.js"></script>
+	<script src="js/bootstrap-dropdown.js"></script>
+	<script src="js/bootstrap-scrollspy.js"></script>
+	<script src="js/bootstrap-tab.js"></script>
+	<script src="js/bootstrap-tooltip.js"></script>
+	<script src="js/bootstrap-popover.js"></script>
+	<script src="js/bootstrap-button.js"></script>
+	<script src="js/bootstrap-collapse.js"></script>
+	<script src="js/bootstrap-carousel.js"></script>
+	<script src="js/bootstrap-typeahead.js"></script>	
+
+	<script>
+			var gauge1 = new Gauge({
+				renderTo  : 'gauge1',
+				width     : 150,
+				height    : 150,
+				minValue  : 0,
+				maxValue  : 100,
+				majorTicks : ['panic','fear','optimism','euphoria'],
+				glow      : true,
+				units     : 'Euros',
+				title     : '$'
+			});
+
+			gauge1.onready = function() {
+				setInterval( function() {
+					gauge1.setValue( Math.random() * 100);
+				}, 1000);
+			};
+
+			gauge1.draw();
+	</script>
+
+</body>
+</html>
