@@ -1,0 +1,36 @@
+jeroldan@P210:~/Downloads$ jitsu databases create mongo tengoMongoDB
+
+info:    Welcome to Nodejitsu juergas
+info:    jitsu v0.12.11, node v0.8.18
+info:    It worked if it ends with Nodejitsu ok
+info:    Executing command databases create mongo tengoMongoDB
+
+info:    A new mongo has been created
+data:    Database Type: mongo
+data:    Database Name: tengoMongoDB
+data:    Connection url: mongodb://nodejitsu_juergas:8dubrcu32rnd5n3vatnndmp102@ds059917.mongolab.com:59917/nodejitsu_juergas_nodejitsudb358675520
+help:    
+help:    Connect with the `mongo` cli client:
+help:    
+             $ mongo ds059917.mongolab.com:59917/nodejitsu_juergas_nodejitsudb358675520 -u nodejitsu_juergas -p 8dubrcu32rnd5n3vatnndmp102
+help:    
+help:    Connect with the `mongodb-native module`:
+help:    
+             var mongodb = require('mongodb');
+             var db = new mongodb.Db('nodejitsu_juergas_nodejitsudb358675520',
+               new mongodb.Server('ds059917.mongolab.com', 59917, {})
+             );
+             db.open(function (err, db_p) {
+               if (err) { throw err; }
+               db.authenticate('nodejitsu_juergas', '8dubrcu32rnd5n3vatnndmp102', function (err, replies) {
+                 // You are now connected and authenticated.
+               });
+             });
+help:    
+help:    Connect with the `mongoose` module:
+help:    
+             var mongoose = require('mongoose');
+             mongoose.connect('mongodb://nodejitsu_juergas:8dubrcu32rnd5n3vatnndmp102@ds059917.mongolab.com:59917/nodejitsu_juergas_nodejitsudb358675520');
+help:    
+info:    Nodejitsu ok
+jeroldan@P210:~/Downloads$ 

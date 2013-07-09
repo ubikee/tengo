@@ -5,7 +5,7 @@ var express = require('express')
 , passport 	= require('passport')
 , LocalStrategy = require('passport-local').Strategy;
 
-var users = require('../users')();
+var users = require('./users')();
 
 passport.use( new LocalStrategy(
 
@@ -14,7 +14,7 @@ passport.use( new LocalStrategy(
 		passwordField : 'password'
 	},
 
-	function(username, password, done) {
+	function(username, password, done) { 
 
 		var loginForm = {
 			'id' 		: username,
@@ -23,12 +23,12 @@ passport.use( new LocalStrategy(
 
 		console.log(loginForm);
 
-		users.login(loginForm, function(err, user) {
+		users.login(loginForm, function(err, user, mssg) {
 
 			if (err) { return done(err); }
 			
 			if (!user) {
-				return done(null, false, { message: 'Incorrect username.' });
+				return done(null, false, { message: mssg });
 			}
 			
 			return done(null, user);
@@ -42,7 +42,7 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(id, done) {
-	users.findOne(id, function (err, user) {
+	users.findById(id, function (err, user) {
 		done(err, user);
 	});
 });
@@ -56,7 +56,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.get('/login', function (req, res) {
-	res.render('login.html');
+	res.render('login.html', { user: req.user, message: req.flash('error') });
 });
 
 app.get('/signup', function (req, res) {
