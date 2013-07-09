@@ -37,7 +37,7 @@ passport.use( new LocalStrategy(
 
 ));
 
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function(user, done) { 
   done(null, user.id);
 });
 
@@ -56,7 +56,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.get('/login', function (req, res) {
-	res.render('login.html', { user: req.user, message: req.flash('error') });
+	res.render('login.html', { 'user' : req.user, 'message' : req.flash('error') });
 });
 
 app.get('/signup', function (req, res) {
@@ -68,7 +68,7 @@ app.post('/login',
 		successRedirect: '/resume',
 		failureRedirect: '/login',
 		failureFlash: true })
-);
+); 
 
 app.post('/signup', function(req, res) {
 
@@ -81,7 +81,7 @@ app.post('/signup', function(req, res) {
 
 	users.signup(user, function(error, user){
 		if (error) 
-			res.render('signup', { 'error' : error });
+			res.render('signup', { 'message' : error });
 		else
 			res.render('signedup', { 'user' : user.id });
 	});

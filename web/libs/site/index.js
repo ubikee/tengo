@@ -9,11 +9,12 @@ app.set('views', __dirname+'/html');
 app.set('view engine', 'html');
 
 app.get('/', function (req, res) {
-	res.render('welcome.html');
+	res.render('welcome.html', { 'user' : req.user });
 });
 
 app.get('/home', function (req, res) {
-	res.render('welcome.html');
+	console.log("usuario : "+req.user);
+	res.render('welcome.html', { 'user' : req.user }); 
 });
 
 app.get('/contact', function (req, res) {
@@ -23,4 +24,3 @@ app.get('/contact', function (req, res) {
 app.get('/documentation', function (req, res) {
 	res.render('documentation.html');
 });
-

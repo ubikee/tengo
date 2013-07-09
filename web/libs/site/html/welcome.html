@@ -36,11 +36,15 @@
 						<li><a href="/documentation">Documentation</a></li>
 						<li><a href="/contact">Contact</a></li>
 					</ul>
+					{% if user %}
+						User : {{ user.nickname }}
+					{% else %}
 					<form class="navbar-form pull-right" method="POST" action="/login">
 						<input class="span2" type="email" placeholder="Email" name="email" required>
 						<input class="span2" type="password" placeholder="Password" name="password" required>
 						<button type="submit" class="btn">Log In</button>
 					</form>
+					{% endif %}
 				</div>
 			</div>
 		</div>
@@ -54,8 +58,6 @@
 			<p>Control your money with Tengo!</p>
 			<p><a href="/signup" class="btn btn-primary btn-large">Sign UP !!! &raquo;</a></p>
 		</div>
-
-
 
 		<div class="row" style="margin-left : 0px">
 			<ul class="thumbnails">

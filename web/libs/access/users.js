@@ -30,7 +30,12 @@ function users() {
 		signup : function (user, callback ) {
 
 			db.collection('users', function (err, collection) {
-				collection.findOne({ 'id' : user.id }, function (err, document) {
+
+
+				collection.findOne({ 'id' : user.id }, function (err, document) {  	// it is not necessary anymore
+																					// since users.id is unique  
+																					// index for the collection 
+																					// in mongodb
 
 					if (err) callback(err,null);
 
