@@ -36,14 +36,14 @@
 						<li><a href="/documentation">Documentation</a></li>
 						<li><a href="/contact">Contact</a></li>
 					</ul>
-					{% if user %}
-						User : {{ user.nickname }}
-					{% else %}
+					{% if !user %}
 					<form class="navbar-form pull-right" method="POST" action="/login">
 						<input class="span2" type="email" placeholder="Email" name="email" required>
 						<input class="span2" type="password" placeholder="Password" name="password" required>
 						<button type="submit" class="btn">Log In</button>
 					</form>
+					{% else %}
+						<p>User : {{ user.nickname }}</p>
 					{% endif %}
 				</div>
 			</div>

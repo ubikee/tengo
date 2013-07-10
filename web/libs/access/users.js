@@ -1,28 +1,17 @@
 var mongodb = require('mongodb');
-
-/* PRO nodejitsu
-var db = new mongodb.Db(
-	'nodejitsu_juergas_nodejitsudb358675520',
-	new mongodb.Server('ds059917.mongolab.com', 59917, {})
-);
-
-
-db.open(function (err, db_p) {
-	
-	if (err) { throw err; }
-	
-	db.authenticate('nodejitsu_juergas', '8dubrcu32rnd5n3vatnndmp102', function (err, replies) {
-		// You are now connected and authenticated.
-	});
-});
-*/
+var config = require('../../config')();
 
 function users() {
  
-	var db = new mongodb.Db('tengoMongoDB', new mongodb.Server('localhost', 27017, {}), {safe:true});
+	var db = new mongodb.Db(config.mongo.database, new mongodb.Server(config.mongo.server, config.mongo.port, {}), {safe:true});
 
 	db.open(function(err, db_p) {
 		if (err) { throw err; }
+		if (process.env.NODE_ENV==='production') {
+			db.authenticate(config.mongo.user, config.mongo.password, function (err, replies) {
+				// You are now connected and authenticated.
+			});
+		}
 	});
 
 	return {

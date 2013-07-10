@@ -12,7 +12,7 @@
     </style>
 	<link href="css/bootstrap-responsive.css" rel="stylesheet">
 
-	<script src="http://smart-ip.net/scripts/com/gauge.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/chart.js"></script>
 
 </head>
 <body>
@@ -34,6 +34,7 @@
 						<li><a href="/documentation">Documentation</a></li>
 						<li><a href="/contact">Contact</a></li>
 					</ul>
+					<p>User : {{ user.nickname }}</p>
 				</div>
 			</div>
 		</div>
@@ -63,6 +64,7 @@
 
 		<div class="page-header">
 			<h2>Global Position</h2>
+			<p>{{ user.nickname }}</p>
 			<div class="btn-group" data-toggle="buttons-radio">
 				<button type="button" class="btn">This week</button>
 				<button type="button" class="btn active">This Month</button>
@@ -73,33 +75,33 @@
 		<div class="row">
 			<div class="span8">
 				<div style="border-bottom: dotted 1px #EEE">
-					<strong>CASH</strong>
-					<span class="label label-success pull-right clearfix">80.000 $</span>
+					<strong>Cash</strong>
+					<span class="label label-success pull-right clearfix">{{ global.cash }} $</span>
 				</div>
 				<div style="border-bottom: dotted 1px #EEE">
-					<strong>Inventory</strong>
-					<span class="label label-info pull-right clearfix">800.000 $</span>
-				</div>
-				<div style="border-bottom: dotted 1px #EEE">
-					<strong>Expenses</strong>
-					<span class="label label-warning pull-right clearfix">10.000 $</span>
+					<strong>Fixed</strong>
+					<span class="label label-info pull-right clearfix">{{ global.fixed }} $</span>
 				</div>
 				<div style="border-bottom: dotted 1px #EEE">
 					<strong>Incoming</strong>
-					<span class="label label-success pull-right clearfix">3.000 $</span>
+					<span class="label label-success pull-right clearfix">... $</span>
+				</div>
+				<div style="border-bottom: dotted 1px #EEE">
+					<strong>Expenses</strong>
+					<span class="label label-warning pull-right clearfix"> ... $</span>
 				</div>
 				<div style="border-bottom: dotted 1px #EEE">
 					<strong>Scheduled</strong>
-					<span class="label label-warning pull-right clearfix">1.000 $</span>
+					<span class="label label-warning pull-right clearfix">{{ global.scheduled }} $</span>
 				</div>
 				<div style="border-bottom: dotted 1px #EEE">
 					<strong>Unexpected</strong>
-					<span class="label label-important pull-right clearfix">500 $</span>
+					<span class="label label-important pull-right clearfix">{{ global.unexpected }} $</span>
 				</div>
 			</div>
 			<div class="span4">
 				<center>
-					<canvas id="gauge1" width="150" height="150"></canvas>
+					<canvas id="myChart" width="350" height="180"></canvas>
 				</center>
 			</div>
 		</div>
@@ -161,26 +163,32 @@
 	<script src="js/bootstrap-carousel.js"></script>
 	<script src="js/bootstrap-typeahead.js"></script>	
 
-	<script>
-			var gauge1 = new Gauge({
-				renderTo  : 'gauge1',
-				width     : 150,
-				height    : 150,
-				minValue  : 0,
-				maxValue  : 100,
-				majorTicks : ['panic','fear','optimism','euphoria'],
-				glow      : true,
-				units     : 'Euros',
-				title     : '$'
-			});
+	<script>			
 
-			gauge1.onready = function() {
-				setInterval( function() {
-					gauge1.setValue( Math.random() * 100);
-				}, 1000);
-			};
+			var data = {
+				labels : ["January","February","March","April","May","June","July"],
+				datasets : [
+					{
+						fillColor : "rgba(220,220,220,0.5)",
+						strokeColor : "rgba(220,220,220,1)",
+						pointColor : "rgba(220,220,220,1)",
+						pointStrokeColor : "#fff",
+						data : [65,59,90,81,56,55,40]
+					},
+					{
+						fillColor : "rgba(151,187,205,0.5)",
+						strokeColor : "rgba(151,187,205,1)",
+						pointColor : "rgba(151,187,205,1)",
+						pointStrokeColor : "#fff",
+						data : [28,48,40,19,96,27,100]
+					}
+				]
+			}
 
-			gauge1.draw();
+			//Get the context of the canvas element we want to select
+			var gctx = document.getElementById("myChart").getContext("2d"); 
+			var myNewChart = new Chart(gctx).Line(data);
+
 	</script>
 
 </body>

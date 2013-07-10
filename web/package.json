@@ -1,7 +1,7 @@
 {
     "name": "tengo",
     "description": "tengo API",
-    "version": "0.0.1-5",
+    "version": "0.0.1-8",
     "author": "Ernesto Roldan <jeroldan@gmail.com>",
     "keywords": [
         "tengo"
@@ -19,7 +19,8 @@
         "chai-http": "0.3.0",
         "connect-flash": "0.1.1",
         "consolidate": "0.9.1",
-        "swig": "0.14.0"
+        "swig": "0.14.0",
+        "mongodb": "1.3.11"
     },
     "main": "./app.js",
     "engines": {
