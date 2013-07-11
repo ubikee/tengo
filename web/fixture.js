@@ -72,28 +72,29 @@ var data = {
 	],
 	'inventory' : [
 		{ 'id' : 'jeroldan@gmail.com', items : [ 
-			{ 'type': 'house', 	'label' : 'My House', 		'value' : '200000', 'expenses' : 500, 	'incomes' : 0 },
-			{ 'type': 'house', 	'label' : 'Rent House', 	'value' : '140000', 'expenses' : 50, 	'incomes' : 450 },
-			{ 'type': 'car', 	'label' : 'Hyundai i30', 	'value' : '9000', 	'expenses' : 300, 	'incomes' : 0 },
-			{ 'type': 'food', 	'label' : 'Mercadona', 		'value' : '0', 		'expenses' : 200, 	'incomes' : 0 },
+			{ 'id' : 'item1', 'type' : 'house', 	'label' : 'My House', 		'value' : '200000', 'expenses' : 500, 	'incomes' : 0 },
+			{ 'id' : 'item2', 'type' : 'house', 	'label' : 'Rent House', 	'value' : '140000', 'expenses' : 50, 	'incomes' : 450 },
+			{ 'id' : 'item3', 'type' : 'car', 	'label' : 'Hyundai i30', 	'value' : '9000', 	'expenses' : 300, 	'incomes' : 0 },
+			{ 'id' : 'item4', 'type' : 'food', 	'label' : 'Mercadona', 		'value' : '0', 		'expenses' : 200, 	'incomes' : 0 },
 		]},
 		{ 'id' : 'anavi@gmail.com', items : [ 
-			{ 'type': 'house', 	'label' : 'My House', 		'value' : '200000', 'expenses' : 500, 	'incomes' : 0 },
-			{ 'type': 'house', 	'label' : 'Rent House', 	'value' : '140000', 'expenses' : 50, 	'incomes' : 450 },
-			{ 'type': 'car', 	'label' : 'Hyundai i30', 	'value' : '9000', 	'expenses' : 300, 	'incomes' : 0 },
-			{ 'type': 'food', 	'label' : 'Mercadona', 		'value' : '0', 		'expenses' : 200, 	'incomes' : 0 },
+			{ 'id' : 'item5', 'type' : 'house', 	'label' : 'My House', 		'value' : '200000', 'expenses' : 500, 	'incomes' : 0 },
+			{ 'id' : 'item6', 'type' : 'house', 	'label' : 'Rent House', 	'value' : '140000', 'expenses' : 50, 	'incomes' : 450 },
+			{ 'id' : 'item7', 'type' : 'car', 	'label' : 'Hyundai i30', 	'value' : '9000', 	'expenses' : 300, 	'incomes' : 0 },
+			{ 'id' : 'item8', 'type' : 'food', 	'label' : 'Mercadona', 		'value' : '0', 		'expenses' : 200, 	'incomes' : 0 },
 		]},
 		{ 'id' : 'juanperro@gmail.com', items : [ 
-			{ 'type': 'house', 	'label' : 'My House', 		'value' : '200000', 'expenses' : 500, 	'incomes' : 0 },
-			{ 'type': 'house', 	'label' : 'Rent House', 	'value' : '140000', 'expenses' : 50, 	'incomes' : 450 },
-			{ 'type': 'car', 	'label' : 'Hyundai i30', 	'value' : '9000', 	'expenses' : 300, 	'incomes' : 0 },
-			{ 'type': 'food', 	'label' : 'Mercadona', 		'value' : '0', 		'expenses' : 200, 	'incomes' : 0 },
+			{ 'id' : 'item9', 'type' : 'house', 	'label' : 'My House', 		'value' : '200000', 'expenses' : 500, 	'incomes' : 0 },
+			{ 'id' : 'item10', 'type' : 'house', 	'label' : 'Rent House', 	'value' : '140000', 'expenses' : 50, 	'incomes' : 450 },
+			{ 'id' : 'item11', 'type' : 'car', 	'label' : 'Hyundai i30', 	'value' : '9000', 	'expenses' : 300, 	'incomes' : 0 },
+			{ 'id' : 'item12', 'type' : 'food', 	'label' : 'Mercadona', 		'value' : '0', 		'expenses' : 200, 	'incomes' : 0 },
 		]},
 		{ 'id' : '1@1.1', items : [ 
-			{ 'type': 'house', 	'label' : 'My House', 		'value' : '200000', 'expenses' : 500, 	'incomes' : 0 },
-			{ 'type': 'house', 	'label' : 'Rent House', 	'value' : '140000', 'expenses' : 50, 	'incomes' : 450 },
-			{ 'type': 'car', 	'label' : 'Hyundai i30', 	'value' : '9000', 	'expenses' : 300, 	'incomes' : 0 },
-			{ 'type': 'food', 	'label' : 'Mercadona', 		'value' : '0', 		'expenses' : 200, 	'incomes' : 0 },
+			{ 'id' : 'item13', 'type' : 'house', 	'label' : 'My House', 		'value' : '200000', 'expenses' : 500, 	'incomes' : 0 },
+			{ 'id' : 'item14', 'type' : 'house', 	'label' : 'Rent House', 	'value' : '140000', 'expenses' : 50, 	'incomes' : 450 },
+			{ 'id' : 'item15', 'type' : 'car', 	'label' : 'Hyundai i30', 	'value' : '9000', 	'expenses' : 300, 	'incomes' : 0 },
+			{ 'id' : 'item16', 'type' : 'food', 	'label' : 'Mercadona', 		'value' : '0', 		'expenses' : 200, 	'incomes' : 0 },
 		]}
-	]
+	],
+	'contracts' : []
 }

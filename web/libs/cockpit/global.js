@@ -15,7 +15,9 @@ function globalPosition() {
 	});
 
 	return {
+
 		findById : function (id, callback) {
+		
 			db.collection('globalPosition', function (err, collection) {
 				collection.findOne({ 'id' : id }, function (err, document) {
 

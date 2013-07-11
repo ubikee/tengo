@@ -25,6 +25,22 @@ app.get('/inventory', ensureAuthenticated, function (req,res) {
 	res.render('inventory.html');
 });
 
+app.get('/contracts', function (req,res) {
+	res.render('contracts.html'); 
+});
+
+app.get('/alerts', function (req,res) {
+	res.render('alerts.html');
+});
+
+app.get('/reports', function (req,res) {
+	res.render('reports.html');
+});
+
+app.get('/market', function (req,res){
+	res.render('market.html');
+});
+
 function ensureAuthenticated(req, res, next) { 
 	if (req.isAuthenticated()) { return next(); }
 	res.redirect('/login'); 
