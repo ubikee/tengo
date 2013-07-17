@@ -10,14 +10,12 @@ app.set('view engine', 'html');
 
 app.get('/resume', ensureAuthenticated, function (req, res) {
 
-	console.log('global position for user : '+req.user.id); 
-
 	global.findById( req.user.id, function (err, data) {
 
 		if (err)
 			console.log(err);
 
-		res.render('resume.html', { 'user' : req.user, 'global' : data });
+		res.render('resume.html', { 'user' : req.user, 'info' : 'info'});
 	});
 });
 

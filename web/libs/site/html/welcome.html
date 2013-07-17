@@ -37,11 +37,10 @@
 						<li><a href="/contact">Contact</a></li>
 					</ul>
 					{% if !user %}
-					<form class="navbar-form pull-right" method="POST" action="/login">
-						<input class="span2" type="email" placeholder="Email" name="email" required>
-						<input class="span2" type="password" placeholder="Password" name="password" required>
-						<button type="submit" class="btn">Log In</button>
-					</form>
+					<ul class="nav pull-right">
+						<li><a href="/login">Log in</a></li>
+						<li><a href="/signup">Sign up</a></li>
+					</ul>
 					{% else %}
 						<p>User : {{ user.nickname }}</p>
 					{% endif %}
@@ -49,7 +48,6 @@
 			</div>
 		</div>
 	</div>
-
 
 	<div class="container" >
 

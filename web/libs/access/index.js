@@ -9,10 +9,7 @@ var users = require('./users')();
 
 passport.use( new LocalStrategy(
 
-	{
-		usernameField : 'email',
-		passwordField : 'password'
-	},
+	{ usernameField : 'email', passwordField : 'password' },
 
 	function(username, password, done) { 
 
@@ -21,27 +18,24 @@ passport.use( new LocalStrategy(
 			'password'	: password
 		}
 
-		console.log(loginForm);
-
-		users.login(loginForm, function(err, user, mssg) {
+		users.login(loginForm, function (err, user, mssg) {
 
 			if (err) { return done(err); }
 			
 			if (!user) {
-				return done(null, false, { message: mssg });
+				return done(null, false, { message : mssg });
 			}
 			
 			return done(null, user);
 		});
 	}
-
 ));
 
-passport.serializeUser(function(user, done) { 
+passport.serializeUser(function (user, done) { 
   done(null, user.id);
 });
 
-passport.deserializeUser(function(id, done) {
+passport.deserializeUser(function (id, done) {
 	users.findById(id, function (err, user) {
 		done(err, user);
 	});
@@ -56,7 +50,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.get('/login', function (req, res) {
-	res.render('login.html', { 'user' : req.user, 'message' : req.flash('error') });
+	res.render('login.html', { 'user' : req.user, 'flash' : req.flash() });
 });
 
 app.get('/signup', function (req, res) {
@@ -70,7 +64,7 @@ app.post('/login',
 		failureFlash: true })
 ); 
 
-app.post('/signup', function(req, res) {
+app.post('/signup', function (req, res) {
 
 	var user = {
 		'id'		: req.param('email'),
@@ -79,7 +73,7 @@ app.post('/signup', function(req, res) {
 		'location'	: req.param('location')
 	}
 
-	users.signup(user, function(error, user){
+	users.signup(user, function (error, user){
 		if (error) 
 			res.render('signup', { 'message' : error });
 		else

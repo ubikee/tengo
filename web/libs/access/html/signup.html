@@ -71,9 +71,13 @@
 				<a class="brand" href="#">Tengo</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
-						<li class="active"><a href="#">Home</a></li>
+						<li><a href="/">Home</a></li>
 						<li><a href="/documentation">Documentation</a></li>
 						<li><a href="/contact">Contact</a></li>
+					</ul>
+					<ul class="nav pull-right">
+						<li><a href="/login">Log in</a></li>
+						<li class="active"><a href="#">Sign up</a></li>
 					</ul>
 				</div>
 			</div>
@@ -84,11 +88,13 @@
 		
 		<form class="form-signin" id="signup" method="POST" action="/signup">
 
+			{% if message %}
 			<div class="alert">
 				<button type="button" class="close" data-dismiss="alert">&times;</button>
 				<h4>Error !!!</h4> 
 				{{message}} 
 			</div>
+			{% endif %}
 
 			<h2 class="form-signin-heading">Please sign in</h2>
 			<input class="input-block-level" name="nickname" type="text" placeholder="User name" required>
