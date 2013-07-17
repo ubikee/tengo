@@ -2,20 +2,18 @@ var express = require('express')
 , util = require('util')
 , api = require('./api')
 
-var app = express();
+var app = express()
 
 // configure Express
 app.configure(function() {
-	app.use(express.logger());
-	app.use(express.bodyParser());
-	app.use(express.methodOverride());
-	app.use(express.static(__dirname + '/public'));
-});
-
+	app.use(express.bodyParser())
+	app.use(express.methodOverride())
+	app.use(express.static(__dirname + '/public'))
+})
 
 app.get('/', function (req,res) {
-	res.send(200);
-});
+	res.send(200)
+})
 
 app.post('/login', function (req, res) {
 
@@ -24,19 +22,58 @@ app.post('/login', function (req, res) {
 		'password'	: req.param('password')
 	}
 
-	console.log(user);
-
 	api.user.login(user).then(
-		function(value) { 
-			res.send(200)
-		},
-		function(reason) {
-			console.log(reason)
-			res.send(400)
-		}
-	);
-});
+		function(value) { res.send(200, user) },
+		function(reason) { res.send(401, reason) }
+	)
+})
 
-app.listen(8001);
+app.post('/signup', function (req, res) {
+
+	var user = {
+		'id'		: req.param('email'),
+		'password'	: req.param('password'),
+		'location'	: req.param('location'),
+		'nickname'	: req.param('nickname')
+	}
+
+	api.user.registry(user).then(
+		function (value) { res.send(200, value) },
+		function (reason) {	res.send(400, reason) }
+	)
+})
+
+app.get('/:user/globalPosition', function (req, res) {
+
+	var user = req.params.user;
+
+	api.user.globalPosition(user).then(
+		function (value) { res.send(200, value) },
+		function (reason) { res.send(500, reason) }
+	)
+})
+
+
+app.get('/:user/inventory', function (req, res) {
+
+	var user = req.params.user;
+
+	api.user.inventory(user).then(
+		function (value) { res.send(200, value) },
+		function (reason) { res.send(500, reason) }
+	)
+})
+
+app.get('/:user/contracts', function (req, res) {
+
+	var user = req.params.user;
+
+	api.user.contracts(user).then(
+		function (value) { res.send(200, value) },
+		function (reason) { res.send(500, reason) }
+	)
+})
+
+app.listen(8001)
 console.log('API listening in port 8001')
-module.exports = app;
+module.exports = app

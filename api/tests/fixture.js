@@ -1,8 +1,8 @@
 var Q = require('q')
 , Db = require('mongodb').Db
-, Server = require('mongodb').Server;
+, Server = require('mongodb').Server
 
-var config = require('../config')(); 
+var config = require('../config')() 
 
 var data = {
 	'users' : [
@@ -62,7 +62,6 @@ var data = {
 
 function prepareCollection (db, collectionName) {
 	var deferred = Q.defer()
-	console.log('preparing table : '+collectionName)
 	db.dropCollection(collectionName, function (err, collection){
 		db.createCollection(collectionName, function (err, collection) {
 			if (err) deferred.reject()
@@ -79,29 +78,33 @@ function prepareCollection (db, collectionName) {
 
 function fixture() {
 
-	var db = new Db(config.mongo.database, new Server(config.mongo.server, config.mongo.port, {}), {safe:true});
+	var db = new Db(config.mongo.database, new Server(config.mongo.server, config.mongo.port, {}), {safe:true})
 	
 	return {
 		run : function() {
+
+			var deferred = Q.defer();
 
 			db.open(function(err, db) {
 
 				if (process.env.NODE_ENV==='production') {
 					db.authenticate('nodejitsu_juergas', '8dubrcu32rnd5n3vatnndmp102', function (err, replies) {
 						// You are now connected and authenticated.
-					});
+					})
 				}
 
 				prepareCollection(db, 'users')
-				.then( function (value) { prepareCollection(db, 'market') })
-				.then( function (value) { prepareCollection(db, 'inventories') })
-				.then( function (value) { prepareCollection(db, 'globalPositions') })
-				.then( function (value) { prepareCollection(db, 'contracts') })
-				.fail( function (error) { console.log(error)})
-				.done();
-			});
+				.then( function (value) { return prepareCollection(db, 'market') })
+				.then( function (value) { return prepareCollection(db, 'inventories') })
+				.then( function (value) { return prepareCollection(db, 'globalPositions') })
+				.then( function (value) { return prepareCollection(db, 'contracts') })
+				.fail( function (error) { deferred.reject() })
+				.done( function ()      { deferred.resolve() })
+			})
+		
+			return deferred.promise
 		}
 	}
 }
 
-module.exports = fixture();
+module.exports = fixture()

@@ -18,7 +18,7 @@ function contracts() {
 
 	return {
 
-		findByUser : function (userId) {
+		findById : function (userId) {
 
 			var deferred = Q.defer();
 
