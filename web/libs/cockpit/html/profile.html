@@ -30,7 +30,14 @@
 						<li><a href="/documentation">Documentation</a></li>
 						<li><a href="/contact">Contact</a></li>
 					</ul>
-					{{ user }}
+					<div class="btn-group pull-right">
+						<a class="btn" href="#"><i class="icon-user"></i> {{ user.nickname }}</a>
+						<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="/profile"><i class="icon-edit"></i> Profile</a></li>
+							<li><a href="/logout"><i class="icon-off"></i> Log out</a></li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>

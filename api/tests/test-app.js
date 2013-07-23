@@ -7,7 +7,7 @@ var assert = require('assert')
 
 chai.use(http);
 
-describe('API web', function() {
+describe('API server', function() {
 
 	before(function(done){
 		fixture.run().then(done)
@@ -19,7 +19,7 @@ describe('API web', function() {
 			done()
 		})
 	})
-/*
+
 	describe('login' , function() {
 
 		it('should return 200 on success', function (done) {
@@ -45,10 +45,10 @@ describe('API web', function() {
 				done()
 			})
 		})
-	});
+	})
 
 	describe('signup', function() {
-
+/*
 		it('signup should return 200', function (done) {
 
 			chai.request(app).post('/signup')
@@ -67,26 +67,30 @@ describe('API web', function() {
 				res.should.have.status(200);
 			})
 		})
-	})
 */
-	it('GET /{userId}/globalPosition', function (done) {
-		chai.request(app).get('/jeroldan@gmail.com/globalPosition').res(function (res) {
-			res.should.have.status(200)
-			done()
-		})
 	})
 
-	it('GET /{userId}/inventory', function (done) {
-		chai.request(app).get('/jeroldan@gmail.com/inventory').res(function (res) {
-			res.should.have.status(200)
-			done()
-		})
-	})
+	describe('user data', function() {
 
-	it('GET /{userId}/contracts', function (done) {
-		chai.request(app).get('/jeroldan@gmail.com/contracts').res(function (res) {
-			res.should.have.status(200)
-			done()
+		it('should obtain global position', function (done) {
+			chai.request(app).get('/jeroldan@gmail.com/globalPosition').res(function (res) {
+				res.should.have.status(200)
+				done()
+			})
+		})
+
+		it('should obtain inventory', function (done) {
+			chai.request(app).get('/jeroldan@gmail.com/inventory').res(function (res) {
+				res.should.have.status(200)
+				done()
+			})
+		})
+
+		it('should obtain contracts', function (done) {
+			chai.request(app).get('/jeroldan@gmail.com/contracts').res(function (res) {
+				res.should.have.status(200)
+				done()
+			})
 		})
 	})
 })

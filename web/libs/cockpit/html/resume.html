@@ -34,7 +34,6 @@
 						<li><a href="/documentation">Documentation</a></li>
 						<li><a href="/contact">Contact</a></li>
 					</ul>
-					<p>User : {{ user.nickname }}</p>
 				</div>
 			</div>
 		</div>
@@ -54,6 +53,14 @@
 						<li><a href="/statistics">Statistics</a></li>
 						<li><a href="/alerts">Alerts</a></li>
 					</ul>
+					<div class="btn-group pull-right">
+						<a class="btn" href="#"><i class="icon-user"></i> {{ user.nickname }}</a>
+						<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="/profile"><i class="icon-edit"></i> Profile</a></li>
+							<li><a href="/logout"><i class="icon-off"></i> Log out</a></li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -64,7 +71,13 @@
 
 		<div class="page-header">
 			<h2>Global Position</h2>
-			<p>{{ user.nickname }}</p>
+			{% if error %}
+			<div class="alert">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+				<h4>Error !!!</h4> 
+				{{error.message}} 
+			</div>
+			{% endif %}
 			<div class="btn-group" data-toggle="buttons-radio">
 				<button type="button" class="btn">This week</button>
 				<button type="button" class="btn active">This Month</button>
@@ -76,11 +89,11 @@
 			<div class="span8">
 				<div style="border-bottom: dotted 1px #EEE">
 					<strong>Cash</strong>
-					<span class="label label-success pull-right clearfix">{{ global.cash }} $</span>
+					<span class="label label-success pull-right clearfix">{{ data.global.cash }} $</span>
 				</div>
 				<div style="border-bottom: dotted 1px #EEE">
 					<strong>Fixed</strong>
-					<span class="label label-info pull-right clearfix">{{ global.fixed }} $</span>
+					<span class="label label-info pull-right clearfix">{{ data.global.fixed }} $</span>
 				</div>
 				<div style="border-bottom: dotted 1px #EEE">
 					<strong>Incoming</strong>
@@ -92,11 +105,11 @@
 				</div>
 				<div style="border-bottom: dotted 1px #EEE">
 					<strong>Scheduled</strong>
-					<span class="label label-warning pull-right clearfix">{{ global.scheduled }} $</span>
+					<span class="label label-warning pull-right clearfix">{{ data.global.scheduled }} $</span>
 				</div>
 				<div style="border-bottom: dotted 1px #EEE">
 					<strong>Unexpected</strong>
-					<span class="label label-important pull-right clearfix">{{ global.unexpected }} $</span>
+					<span class="label label-important pull-right clearfix">{{ data.global.unexpected }} $</span>
 				</div>
 			</div>
 			<div class="span4">
@@ -113,7 +126,7 @@
 				<h4>Expenses</h4>
 				<div>
 					<small>Mortage</small>
-					<span class="label label-warning pull-right clearfix">800 $</span>
+					<span class="label label-warning pull-right clearfix">100 $</span>
 				</div>
 				<div>
 					<small>Gasoline</small>
@@ -130,14 +143,14 @@
 			</div>
 
 			<div class="span6">
-				<h4 class="text-right">Incomes</h4>
-				<div style="border-bottom: dotted 1px #EEE">
-					<span class="label label-success">2.000 $</span>
-					<span class="pull-right clearfix"><small>My Job</small></span>
+				<h4>Incomes</h4>
+				<div>
+					<small>My Job</small>
+					<span class="label label-success pull-right clearfix">2.000 $</span>
 				</div>
-				<div style="border-bottom: dotted 1px #EEE">
-					<span class="label label-success">5.00 $</span>
-					<span class="pull-right clearfix"><small>House2 Renting</small></span>
+				<div>
+					<small>House2 Renting</small>
+					<span class="label label-successs pull-right clearfix">5.00 $</span>
 				</div>
 			</div>
 

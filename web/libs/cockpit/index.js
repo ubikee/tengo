@@ -1,45 +1,94 @@
 var express = require('express')
-, cons = require('consolidate');
+, cons = require('consolidate')
 
-var global = require('./global')();
-var app = module.exports = express();
+var api = require('tengo-api')
 
-app.engine('html', cons.swig);
-app.set('views', __dirname+'/html');
-app.set('view engine', 'html');
+var app = module.exports = express()
 
+app.engine('html', cons.swig)
+app.set('views', __dirname+'/html')
+app.set('view engine', 'html')
+
+/* 
+ * Global Position
+ */
 app.get('/resume', ensureAuthenticated, function (req, res) {
 
-	global.findById( req.user.id, function (err, data) {
+	var data = {}
 
-		if (err)
-			console.log(err);
+	api.user.globalPosition(req.user.id).then( function (value) {
 
-		res.render('resume.html', { 'user' : req.user, 'info' : 'info'});
-	});
-});
+		data.global = { 
+			'cash' : value.cash,
+			'fixed' : value.fixed,
+			'scheduled' : value.scheduled,
+			'unexpected' : value.unexpected
+		}
+		res.render('resume.html', { 'user' : req.user, 'data' : data })
 
+	}).fail( function (reason) {
+		res.render('resume.html', {'user' : req.user, 'data' : data, 'error' : { 'message' : reason }})
+	}).done()
+})
+
+/* 
+ * Inventory
+ */
 app.get('/inventory', ensureAuthenticated, function (req,res) {
-	res.render('inventory.html');
-});
 
-app.get('/contracts', function (req,res) {
-	res.render('contracts.html'); 
-});
+	var data = {}
 
-app.get('/alerts', function (req,res) {
-	res.render('alerts.html');
-});
+	api.user.inventory(req.user.id).then( function (value) {
 
-app.get('/reports', function (req,res) {
-	res.render('reports.html');
-});
+		data.inventory = value
+		res.render('inventory.html', { 'user' : req.user, 'data' : data })
 
-app.get('/market', function (req,res){
-	res.render('market.html');
-});
+	}).fail( function (reason) {
+		res.render('inventory.html', {'user' : req.user, 'data' : data, 'error' : { 'message' : reason }})
+	}).done()
+})
+
+/*
+ * Market
+ */
+app.get('/market',  ensureAuthenticated, function (req, res) {
+
+	var data = {}
+
+	api.market.catalog().then( function (value) {
+
+		data.market = value
+		console.log(data)
+		res.render('market.html', { 'user' : req.user, 'data' : data })
+
+	}).fail( function (reason) {
+		res.render('market.html', {'user' : req.user, 'data' : data, 'error' : { 'message' : reason }})
+	}).done()
+})
+
+/*
+ * Contracts
+ */
+app.get('/contracts',  ensureAuthenticated, function (req, res) {
+	res.render('contracts.html', { 'user' : req.user }) 
+}) 
+
+app.get('/alerts',  ensureAuthenticated, function (req, res) {
+	res.render('alerts.html', { 'user' : req.user })
+})
+
+app.get('/reports',  ensureAuthenticated, function (req, res) {
+	res.render('reports.html', { 'user' : req.user })
+})
+
+
+app.get('/profile',  ensureAuthenticated, function (req, res) {
+	res.render('profile', { 'user' : req.user })
+})
 
 function ensureAuthenticated(req, res, next) { 
-	if (req.isAuthenticated()) { return next(); }
-	res.redirect('/login'); 
+	if (req.isAuthenticated()) { 
+		return next() 
+	}
+	res.redirect('/login') 
 }

@@ -51,6 +51,14 @@
 						<li><a href="/alerts">Alerts</a></li>
 						<li><a href="/profile">Profile</a></li>
 					</ul>
+					<div class="btn-group pull-right">
+						<a class="btn" href="#"><i class="icon-user"></i> {{ user.nickname }}</a>
+						<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="/profile"><i class="icon-edit"></i> Profile</a></li>
+							<li><a href="/logout"><i class="icon-off"></i> Log out</a></li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -65,11 +73,11 @@
 
 			<div class="row">
 				<ul class="thumbnails">
+					{% for item in data.market %}
 					<li class="span2">
-						
 						<div class="thumbnail">
 							<img src="img/glyphicons_020_home.png" style="margin-top:5px">
-							<h4 class="text-center">House</h4>
+							<h4 class="text-center">{{ item.label }}</h4>
 							<div>
 								<span class="label"><img src="img/glyphicons_205_electricity.png"></span>
 							</div>
@@ -80,149 +88,8 @@
 								</a>
 							</div>
 						</div>
-					
 					</li>
-					<li class="span2">
-						<div class="thumbnail">
-							<img src="img/glyphicons_020_home.png" style="margin-top:5px">
-							<h4 class="text-center">House</h4>
-							<div>
-								<span class="label"><img src="img/glyphicons_205_electricity.png"></span>
-							</div>
-							<hr style="margin : 3px;">
-							<div>
-								<a class="btn btn-info btn-mini"><i class="icon-info-sign icon-white"></i></a>
-								<a class="btn btn-danger btn-mini pull-right clearfix"><i class="icon-shopping-cart icon-white"></i></a>
-							</div>
-						</div>
-					</li>
-					<li class="span2">
-						<div class="thumbnail">
-							<img src="img/glyphicons_020_home.png" style="margin-top:5px">
-							<h4 class="text-center">House</h4>
-							<div>
-								<span class="label"><img src="img/glyphicons_205_electricity.png"></span>
-							</div>
-							<hr style="margin : 3px;">
-							<div>
-								<a class="btn btn-info btn-mini"><i class="icon-info-sign icon-white"></i></a>
-								<a class="btn btn-danger btn-mini pull-right clearfix"><i class="icon-shopping-cart icon-white"></i></a>
-							</div>
-						</div>
-					</li>
-					<li class="span2">
-						<div class="thumbnail">
-							<img src="img/glyphicons_020_home.png" style="margin-top:5px">
-							<h4 class="text-center">House</h4>
-							<div>
-								<span class="label"><img src="img/glyphicons_205_electricity.png"></span>
-							</div>
-							<hr style="margin : 3px;">
-							<div>
-								<a class="btn btn-info btn-mini"><i class="icon-info-sign icon-white"></i></a>
-								<a class="btn btn-danger btn-mini pull-right clearfix"><i class="icon-shopping-cart icon-white"></i></a>
-							</div>
-						</div>
-					</li>
-					<li class="span2">
-						<div class="thumbnail">
-							<img src="img/glyphicons_020_home.png" style="margin-top:5px">
-							<h4 class="text-center">House</h4>
-							<div>
-								<span class="label"><img src="img/glyphicons_205_electricity.png"></span>
-							</div>
-							<hr style="margin : 3px;">
-							<div>
-								<a class="btn btn-info btn-mini"><i class="icon-info-sign icon-white"></i></a>
-								<a class="btn btn-danger btn-mini pull-right clearfix"><i class="icon-shopping-cart icon-white"></i></a>
-							</div>
-						</div>
-					</li>
-					<li class="span2">
-						<div class="thumbnail">
-							<img src="img/glyphicons_020_home.png" style="margin-top:5px">
-							<h4 class="text-center">House</h4>
-							<div>
-								<span class="label"><img src="img/glyphicons_205_electricity.png"></span>
-							</div>
-							<hr style="margin : 3px;">
-							<div>
-								<a class="btn btn-info btn-mini"><i class="icon-info-sign icon-white"></i></a>
-								<a class="btn btn-danger btn-mini pull-right clearfix"><i class="icon-shopping-cart icon-white"></i></a>
-							</div>
-						</div>
-					</li>
-					<li class="span2">
-						<div class="thumbnail">
-							<img src="img/glyphicons_020_home.png" style="margin-top:5px">
-							<h4 class="text-center">House</h4>
-							<div>
-								<span class="label"><img src="img/glyphicons_205_electricity.png"></span>
-							</div>
-							<hr style="margin : 3px;">
-							<div>
-								<a class="btn btn-info btn-mini"><i class="icon-info-sign icon-white"></i></a>
-								<a class="btn btn-danger btn-mini pull-right clearfix"><i class="icon-shopping-cart icon-white"></i></a>
-							</div>
-						</div>
-					</li>
-					<li class="span2">
-						<div class="thumbnail">
-							<img src="img/glyphicons_020_home.png" style="margin-top:5px">
-							<h4 class="text-center">House</h4>
-							<div>
-								<span class="label"><img src="img/glyphicons_205_electricity.png"></span>
-							</div>
-							<hr style="margin : 3px;">
-							<div>
-								<a class="btn btn-info btn-mini"><i class="icon-info-sign icon-white"></i></a>
-								<a class="btn btn-danger btn-mini pull-right clearfix"><i class="icon-shopping-cart icon-white"></i></a>
-							</div>
-						</div>
-					</li>
-					<li class="span2">
-						<div class="thumbnail">
-							<img src="img/glyphicons_020_home.png" style="margin-top:5px">
-							<h4 class="text-center">House</h4>
-							<div>
-								<span class="label"><img src="img/glyphicons_205_electricity.png"></span>
-							</div>
-							<hr style="margin : 3px;">
-							<div>
-								<a class="btn btn-info btn-mini"><i class="icon-info-sign icon-white"></i></a>
-								<a class="btn btn-danger btn-mini pull-right clearfix"><i class="icon-shopping-cart icon-white"></i></a>
-							</div>
-						</div>
-					</li>
-					<li class="span2">
-						<div class="thumbnail">
-							<img src="img/glyphicons_020_home.png" style="margin-top:5px">
-							<h4 class="text-center">House</h4>
-							<div>
-								<span class="label"><img src="img/glyphicons_205_electricity.png"></span>
-							</div>
-							<hr style="margin : 3px;">
-							<div>
-								<a class="btn btn-info btn-mini"><i class="icon-info-sign icon-white"></i></a>
-								<a class="btn btn-danger btn-mini pull-right clearfix"><i class="icon-shopping-cart icon-white"></i></a>
-							</div>
-						</div>
-					</li>
-					<li class="span2">
-						<div class="thumbnail">
-							<img src="img/glyphicons_020_home.png" style="margin-top:5px">
-							<h4 class="text-center">House</h4>
-							<div>
-								<span class="label"><img src="img/glyphicons_205_electricity.png"></span>
-							</div>
-							<hr style="margin : 3px;">
-							<div>
-								<a class="btn btn-info btn-mini"><i class="icon-info-sign icon-white"></i></a>
-								<a class="btn btn-danger btn-mini pull-right clearfix"><i class="icon-shopping-cart icon-white"></i></a>
-							</div>
-						</div>
-					</li>
-																																																		
+					{% endfor %}
 				</ul>
 			</div>
 

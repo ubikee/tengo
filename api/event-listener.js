@@ -3,15 +3,17 @@ var redis = require("redis")
 , markets = require('./libs/markets')()
 , bus = require('./libs/bus')();
 
-var client1 = redis.createClient(),
-client2 = redis.createClient();
-
 var eventListener = function() {
 
-	/* TODO : bind to event bus and register events to listen to */
-
 	bus.eventHandler('userRegistered', function(event) {
-		users.signup(event.data);
+
+		users.signup(event.data)
+		.then ( 
+			function (value) { return inventories.init(event.data.id) })
+		.then (
+			function (value) { return contracts.init(event.data.id) })
+		.fail (
+			function (reason) { console.log(reason)})
 	});
 
 	bus.eventHandler('productPurchased', function(event) {

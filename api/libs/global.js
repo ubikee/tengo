@@ -26,7 +26,7 @@ function globalPosition() {
 				if (err)
 					deferred.reject(err)
 
-				collection.findOne({ 'id' : 'jeroldan@gmail.com' }, function (err, document) {
+				collection.findOne({ 'id' : id }, function (err, document) {
 
 					if (err)
 						deferred.reject(err)

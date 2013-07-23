@@ -20,7 +20,7 @@
         "should": "1.2.1",
         "assert": "0.4.9"
     },
-    "main": "./app.js",
+    "main": "api.js",
     "engines": {
         "node": "*"
     },

@@ -14,8 +14,7 @@ describe('BUS', function(){
 			console.log('running event handler for' + JSON.stringify(event));
 		});
 
-		return bus.init()
-		.then( 
+		return bus.init().then( 
 			function (value)  { 
 				bus.sendEvent({ 'type' : 'event1'});
 				bus.sendEvent({ 'type' : 'event1'});

@@ -14,7 +14,13 @@ var api = function() {
 
 		user : { 
 			registry : function (user) {
-				return bus.command({ 'command' : 'registerUser', 'data' : { 'user' : user }})
+
+				bus.command({ 
+					'type' : 'registerUser', 
+					'data' : { 'user' : user }
+				})
+
+				return { 'status' : 'processed', 'message' : 'User registration in process'}
 			},
 
 			login : function (user) {

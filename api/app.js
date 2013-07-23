@@ -25,7 +25,7 @@ app.post('/login', function (req, res) {
 	api.user.login(user).then(
 		function(value) { res.send(200, user) },
 		function(reason) { res.send(401, reason) }
-	)
+	).done()
 })
 
 app.post('/signup', function (req, res) {
@@ -40,7 +40,7 @@ app.post('/signup', function (req, res) {
 	api.user.registry(user).then(
 		function (value) { res.send(200, value) },
 		function (reason) {	res.send(400, reason) }
-	)
+	).done()
 })
 
 app.get('/:user/globalPosition', function (req, res) {
@@ -50,9 +50,8 @@ app.get('/:user/globalPosition', function (req, res) {
 	api.user.globalPosition(user).then(
 		function (value) { res.send(200, value) },
 		function (reason) { res.send(500, reason) }
-	)
+	).done()
 })
-
 
 app.get('/:user/inventory', function (req, res) {
 
@@ -61,7 +60,7 @@ app.get('/:user/inventory', function (req, res) {
 	api.user.inventory(user).then(
 		function (value) { res.send(200, value) },
 		function (reason) { res.send(500, reason) }
-	)
+	).done()
 })
 
 app.get('/:user/contracts', function (req, res) {
@@ -71,9 +70,9 @@ app.get('/:user/contracts', function (req, res) {
 	api.user.contracts(user).then(
 		function (value) { res.send(200, value) },
 		function (reason) { res.send(500, reason) }
-	)
+	).done()
 })
 
 app.listen(8001)
-console.log('API listening in port 8001')
+console.log('API Server listening in port 8001')
 module.exports = app

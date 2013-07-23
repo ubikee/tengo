@@ -54,9 +54,9 @@ var data = {
 		]}
 	],
 	'market' : [
-		{ 'id' : 'house', 	'attributes' : { 'label' : { 'type' : 'string', 'need' : 'manadatory' } } },
-		{ 'id' : 'car', 	'attributes' : { 'label' : { 'type' : 'string', 'need' : 'manadatory' } } },
-		{ 'id' : 'job', 	'attributes' : { 'label' : { 'type' : 'string', 'need' : 'manadatory' } } }
+		{ 'id' : 'house', 	'label' : 'House' },
+		{ 'id' : 'car', 	'label' : 'Car' },
+		{ 'id' : 'land', 	'label' : 'Land' }
 	]
 }
 
@@ -81,6 +81,9 @@ function fixture() {
 	var db = new Db(config.mongo.database, new Server(config.mongo.server, config.mongo.port, {}), {safe:true})
 	
 	return {
+
+		db : data,
+
 		run : function() {
 
 			var deferred = Q.defer();
