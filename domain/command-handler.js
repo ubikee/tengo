@@ -3,11 +3,25 @@ var redis = require("redis")
 
 var commandHandler = function() {
 
-	bus.commandHandler('registerUser', function(command) {
+	bus.init().then(function() {
 
-		// create new user in domain (neo4j????)
+		bus.commandHandler('registerUser', function (command) {
 
-		bus.sendEvent({ 'type' : 'event1', 'data' : command.data });
+			// create new user in domain (neo4j????)
+			console.log('register user command handler')
+
+			bus.sendEvent({ 'type' : 'userRegistered', 'data' : command.data });
+		})
+
+		bus.commandHandler('productPurchase', function (command) {
+
+			// process purchase
+			console.log('process purchase command handler')
+
+			bus.sendEvent({ 'type' : 'purchased', data : {}})
+
+		})
+
 	})
 
 	return {
@@ -20,4 +34,4 @@ var commandHandler = function() {
 	}
 }
 
-module.exports = commandHandler()
+module.exports = commandHandler

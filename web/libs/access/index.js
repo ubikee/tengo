@@ -85,3 +85,7 @@ app.get('/logout', function (req, res){
 	req.logout();
 	res.redirect('/');
 });
+
+app.subscribe = function() {
+	console.log('culo access')
+}

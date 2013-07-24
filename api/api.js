@@ -51,7 +51,13 @@ var api = function() {
 			},
 			
 			purchase : function(userId, product) {
-				return bus.command({ 'command' : 'purchaseProduct', data : { 'user' : userId, 'product' : product }})
+				bus.command({ 'command' : 'purchaseProduct', data : { 'user' : userId, 'product' : product }})
+			}
+		},
+
+		events : {
+			addEventHandler : function (event, handler) {
+				bus.eventHandler(event, handler);
 			}
 		}
 	}

@@ -24,3 +24,7 @@ app.get('/contact', function (req, res) {
 app.get('/documentation', function (req, res) {
 	res.render('documentation.html');
 });
+
+app.subscribe = function() {
+	console.log('culo site')
+}

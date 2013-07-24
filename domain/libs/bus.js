@@ -55,7 +55,7 @@ function bus() {
 			})
 
 			subscriber.subscribe('events')
-			subscriber.subscribe('commands')
+			//subscriber.subscribe('commands')
 
 			return deferred.promise
 		},

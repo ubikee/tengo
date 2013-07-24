@@ -108,17 +108,16 @@
 			<h3 id="myModalLabel">House</h3>
 		</div>
 		<div class="modal-body">
-			<div class="control-group error">
-				<label class="control-label" for="inputWarning">Label</label>
-				<div class="controls">
-					<input type="text" id="house-label">
-					<span class="help-inline">Mandatory!</span>
+			<form class="purchase">
+				<div class="control-group error">
+					<input class="input-block-level" name="label" type="text" placeholder="Product Label" required>
+					<input class="input-block-level" name="value" type="text" placeholder="Product Value" required>
 				</div>
-			</div>
+			</form>
 		</div>
 		<div class="modal-footer">
 			<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-			<button class="btn btn-primary">Save changes</button>
+			<button class="btn btn-success" id="submit">Purchase</button>
 		</div>
 	</div>
 
@@ -135,6 +134,27 @@
 	<script src="js/bootstrap-collapse.js"></script>
 	<script src="js/bootstrap-carousel.js"></script>
 	<script src="js/bootstrap-typeahead.js"></script>	
+
+	<script>
+		$(function() {
+			//twitter bootstrap script
+			$("button#submit").click(function(){
+				$.ajax({
+					type: "POST",
+					url: "/market/purchase",
+					data: $('form.purchase').serialize(),
+					success: function(msg){
+						alert(msg)
+						//$("#thanks").html(msg)
+						$("#form-content").modal('hide')
+					},
+					error: function(){
+						alert("failure");
+					}
+				})
+			})
+		});
+	</script>
 
 </body>
 </html>

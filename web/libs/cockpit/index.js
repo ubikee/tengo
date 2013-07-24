@@ -58,12 +58,21 @@ app.get('/market',  ensureAuthenticated, function (req, res) {
 	api.market.catalog().then( function (value) {
 
 		data.market = value
-		console.log(data)
 		res.render('market.html', { 'user' : req.user, 'data' : data })
 
 	}).fail( function (reason) {
 		res.render('market.html', {'user' : req.user, 'data' : data, 'error' : { 'message' : reason }})
 	}).done()
+})
+
+app.post('/market/purchase', ensureAuthenticated, function (req, res) {
+
+	var product = { 'p' : 'p1' }
+
+	api.market.purchase(req.user.id, product);
+
+	res.send({'user' : req.user, 'data' : JSON.stringify(product), 'error' : { 'message' : 'culo' }})
+
 })
 
 /*
@@ -85,6 +94,18 @@ app.get('/reports',  ensureAuthenticated, function (req, res) {
 app.get('/profile',  ensureAuthenticated, function (req, res) {
 	res.render('profile', { 'user' : req.user })
 })
+
+app.subscribe = function(socket) {
+	
+	console.log('register cockpit event listeners')
+	
+	api.events.addEventHandler('purchased', function(event) {
+
+		console.log('running event handler for' + JSON.stringify(event))
+		
+		socket.emit('purchased', { 'event' : event })
+	})
+}
 
 function ensureAuthenticated(req, res, next) { 
 	if (req.isAuthenticated()) { 
