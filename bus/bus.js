@@ -1,9 +1,8 @@
 var Q = require('q')
 , _ = require('underscore')
 , redis = require("redis")
-, config = require('./config')()
 
-function bus() {
+function bus(config) {
 
 	var subscriber = {}
 
@@ -14,20 +13,31 @@ function bus() {
 		commands : {}
 	}
 
-	function publisherConnection () {
+	function newConnection() {
+		
+		var deferred = Q.defer()
+		
+		var conn = redis.createClient(config.redis.port, config.redis.server)
+		if (process.env.NODE_ENV==='production') 
+			conn.auth(config.redis.password, function () {})
 
+		conn.on('ready', function(err) {
+			if (err)
+				deferred.reject()
+			deferred.resolve(conn)
+		})
+
+		return deferred.promise
+	}
+
+	function publisherConnection () {
+		
 		var deferred = Q.defer()
 
-		publisher = redis.createClient(config.redis.port, config.redis.server)
-		if (process.env.NODE_ENV==='production') 
-			publisher.auth(config.redis.password, function () { console.log('bus : publisher -> user authenticated! ')})
-
-		publisher.on('ready', function (err) {
-			if (err)
-				deferred.reject(err)
-
-			deferred.resolve(publisher)
-		})
+		newConnection().then( function (conn) {
+			publisher = conn
+			deferred.resolve(conn)
+		}).done()
 
 		return deferred.promise
 	}
@@ -36,34 +46,22 @@ function bus() {
 		
 		var deferred = Q.defer()
 		
-		subscriber = redis.createClient(config.redis.port, config.redis.server)
-		if (process.env.NODE_ENV==='production') 
-			subscriber.auth(config.redis.password, function () { console.log('bus : subscriber -> user authenticated! ')})
-
-		subscriber.on('ready', function (err) {
-			
-			if (err)
-				deferred.reject(err)
-			
-			subscriber.on('subscribe', function(channel, count) {
-
-			})
-
+		newConnection().then( function (conn) {
+			subscriber = conn
 			subscriber.on('message', function (channel, mssg) {
 				var message = JSON.parse(mssg);
 				_.each( handlers[channel][message.type], function (handler) {
 					handler(message)
 				})
 			})
-
 			deferred.resolve(subscriber)
-		})
-		
+		}).done()
+
 		return deferred.promise
 	}
 
 	function publish(channel, event) {
-		publisher.publish(channel, JSON.stringify(event));
+		publisher.publish(channel, JSON.stringify(event))
 	}
 
 	function subscribeChannel(channel) {
@@ -72,6 +70,11 @@ function bus() {
 
 	function unsubscribeChannel(channel) {
 		subscriber.unsubscribe(channel)
+	}
+
+	function quit() {
+		subscriber.end() 
+		publisher.end()
 	}
 
 	return {
@@ -94,8 +97,7 @@ function bus() {
 		stop : function () {
 			unsubscribeChannel('events')
 			unsubscribeChannel('commands')
-			subscriber.quit()
-			publisher.quit()
+			quit()
 		},
 
 		addEventHandler : function (type, handler) {

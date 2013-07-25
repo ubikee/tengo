@@ -2,7 +2,8 @@ var Q = require('q')
 , chai = require("chai")
 , should = chai.should()
 , chaiAsPromised = require("chai-as-promised")
-, bus = require('../bus')()
+, config = require('./config')()
+, bus = require('../bus')(config)
 
 chai.use(chaiAsPromised)
 require("mocha-as-promised")()
@@ -18,21 +19,29 @@ describe('bus', function () {
 	this.timeout(50000) 
 
 	before(function (done) {
-		bus.connect().then(function(){ done() })
+		bus.connect().then(function(){ 
+			console.log('  connected')
+			done() 
+		})
 	})
 
 	beforeEach(function (done) {
-		bus.clear();
+		bus.clear()
 		done()
 	})
 
+	after(function(done) {
+		//bus.stop()
+		done()
+	})
+	
 	it ('should subscribe event handlers', function (done) {
 
 		bus.addEventHandler('event1', function (ev) { count++; } )
-		var count1 = bus.addEventHandler('event1', function (ev) {  } )
-		var count2 = bus.addEventHandler('event2', function (ev) {  } )
+		var count1 = bus.addEventHandler('event1', function (ev) { /* DO SOMETHING */ } )
+		var count2 = bus.addEventHandler('event2', function (ev) { /* DO SOMETHING */ } )
 
-		delay(2000).then( function () {
+		delay(1000).then( function () {
 			count1.should.equal(2)
 			count2.should.equal(1) 
 			done()
@@ -44,15 +53,14 @@ describe('bus', function () {
 		var count = 0
 
 		bus.addEventHandler('event1', function (ev) { count++; } )
-		bus.addEventHandler('event2', function (ev) { count++; } )
 
 		bus.sendEvent({ 'type' : 'event1', 'data' : { 'field1' : '1'}})
+		bus.sendEvent({ 'type' : 'event1', 'data' : { 'field1' : '2'}})
 
-		delay(2000).then( function() { 
-			count.should.equal(1)
-			bus.stop() 
+		delay(1000).then( function() { 
+			count.should.equal(2)
 			done() 
 		})
-
 	})
+
 })
