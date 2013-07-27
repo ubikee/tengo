@@ -57,9 +57,23 @@ describe('bus', function () {
 		bus.sendEvent({ 'type' : 'event1', 'data' : { 'field1' : '1'}})
 		bus.sendEvent({ 'type' : 'event1', 'data' : { 'field1' : '2'}})
 
-		delay(1000).then( function() { 
+		delay(2000).then(function (value) { 
 			count.should.equal(2)
 			done() 
+		})
+	})
+
+	it ('should handle command', function (done) {
+		var count = 0;
+
+		bus.addCommandHandler('command1', function (ev) { count++ })
+
+		bus.sendCommand({ 'type' : 'command1', 'data' : { 'field1' : 'c1' }})
+		bus.sendCommand({ 'type' : 'command1', 'data' : { 'field1' : 'c1' }})
+
+		delay(2000).then(function (value) {
+			count.should.equal(2)
+			done()
 		})
 	})
 

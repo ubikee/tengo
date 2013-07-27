@@ -5,7 +5,6 @@ var flash = require('connect-flash')
 , site = require('./libs/site')
 , access = require('./libs/access')
 , cockpit = require('./libs/cockpit')
-, domain = require('tengo-domain')()
 
 var app = express()
 var server = require('http').createServer(app)
@@ -29,9 +28,6 @@ console.log('listening in port 8000')
 
 var io = require('socket.io').listen(server)
 io.sockets.on('connection', function (socket) {
-
 	console.log('connection established '+socket)
-
 	cockpit.subscribe(socket)
-
 })

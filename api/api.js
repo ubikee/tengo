@@ -1,21 +1,39 @@
 var Q = require('q')
-, users = require('./libs/users')()
-, markets = require('./libs/markets')()
-, contracts =require('./libs/contracts')()
-, inventories = require('./libs/inventories')()
-, globalPosition =require('./libs/global')()
-, bus = require('./libs/bus')()
+, mongodb = require('mongodb')
 
-var api = function() {
+var api = function(config) {
 
-	bus.init()
+// TODO: re-think all the bus and db connection initialization
+
+	var bus = require('tengo-bus')(config)
+	bus.connect(config)
+
+	var db = new mongodb.Db(config.mongo.database, new mongodb.Server(config.mongo.server, config.mongo.port, {}), {safe:true})
+
+	db.open(function(err, db_p) {
+
+		if (err) 
+			throw err
+
+		if (process.env.NODE_ENV==='production') {
+			db.authenticate(config.mongo.user, config.mongo.password, function (err, replies) {
+				// You are now connected and authenticated.
+			})
+		}
+	})
+
+	var users = require('./libs/users')(db)
+ 	, markets = require('./libs/markets')(db)
+	, contracts = require('./libs/contracts')(db)
+	, inventories = require('./libs/inventories')(db)
+	, globalPosition = require('./libs/global')(db)
 
 	return {
 
 		user : { 
 			registry : function (user) {
 
-				bus.command({ 
+				bus.sendCommand({ 
 					'type' : 'registerUser', 
 					'data' : { 'user' : user }
 				})
@@ -51,16 +69,17 @@ var api = function() {
 			},
 			
 			purchase : function(userId, product) {
-				bus.command({ 'command' : 'purchaseProduct', data : { 'user' : userId, 'product' : product }})
+				bus.sendCommand({ 'command' : 'purchaseProduct', data : { 'user' : userId, 'product' : product }})
+				return { 'status' : 'processed', 'message' : 'Purchase in process'}
 			}
 		},
 
 		events : {
 			addEventHandler : function (event, handler) {
-				bus.eventHandler(event, handler);
+				bus.addEventHandler(event, handler);
 			}
 		}
 	}
 }
 
-module.exports = api()
+module.exports = api

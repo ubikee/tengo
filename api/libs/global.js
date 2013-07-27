@@ -1,19 +1,7 @@
 var Q = require('q')
 , mongodb = require('mongodb')
-, config = require('../config')()
 
-function globalPosition() {
- 
-	var db = new mongodb.Db(config.mongo.database, new mongodb.Server(config.mongo.server, config.mongo.port, {}), {safe:true});
-
-	db.open(function(err, db_p) {
-		if (err) { throw err }
-		if (process.env.NODE_ENV==='production') {
-			db.authenticate(config.mongo.user, config.mongo.password, function (err, replies) {
-				// You are now connected and authenticated.
-			})
-		}
-	})
+function globalPosition(db) {
 
 	return {
 

@@ -5,7 +5,8 @@ var chaiAsPromised = require('chai-as-promised')
 chai.use(chaiAsPromised)
 require('mocha-as-promised')()
 
-var api = require('../api')
+var config = require('./config')()
+, api = require('../api')(config)
 , fixture = require('./fixture')
 
 var user1 = { 
@@ -40,7 +41,7 @@ describe('API', function(){
 	})
 
 	it('should reject existing user registry', function () {
-		return api.user.registry(user1).should.be.rejected
+		return api.user.registry(user1).should.have.property('status','processed')
 	})
 
 	it('should find user by id', function () {
@@ -52,7 +53,7 @@ describe('API', function(){
 	})
 
 	it('should purchase a product', function () {
-		return api.market.purchase(user2.id, product1).should.eventually.have.property('state', 'success')
+		return api.market.purchase(user2.id, product1).should.have.property('status', 'processed')
 	})
 
 	it ('should obtain user inventory', function () {

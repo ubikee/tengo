@@ -2,7 +2,9 @@ var Q = require('q')
 , _ = require('underscore')
 , redis = require("redis")
 
-function bus(config) {
+function bus(cfg) {
+
+	var config = cfg
 
 	var subscriber = {}
 
@@ -16,7 +18,7 @@ function bus(config) {
 	function newConnection() {
 		
 		var deferred = Q.defer()
-		
+
 		var conn = redis.createClient(config.redis.port, config.redis.server)
 		if (process.env.NODE_ENV==='production') 
 			conn.auth(config.redis.password, function () {})
@@ -109,8 +111,21 @@ function bus(config) {
 			return eventHandlers[type].length
 		},
 
+		addCommandHandler : function (type, handler) {
+			var commandHandlers = handlers['commands']
+			if (!commandHandlers[type])
+				commandHandlers[type] = []
+
+			commandHandlers[type].push(handler)
+			return commandHandlers[type].length
+		},
+
 		sendEvent : function (ev) {
 			publish('events', ev)
+		},
+
+		sendCommand : function (command) {
+			publish('commands', command)
 		},
 
 		clear : function () {

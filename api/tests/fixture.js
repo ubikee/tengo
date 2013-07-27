@@ -2,7 +2,7 @@ var Q = require('q')
 , Db = require('mongodb').Db
 , Server = require('mongodb').Server
 
-var config = require('../config')() 
+var config = require('./config')() 
 
 var data = {
 	'users' : [
@@ -68,6 +68,7 @@ function prepareCollection (db, collectionName) {
 			collection.insert(data[collectionName], {w:1}, function (err, result) {
 				if (err) deferred.reject()
 				collection.ensureIndex({id:1}, {unique:true, background:true, dropDups:true, w:1}, function(err, indexName) {
+					console.log('collection prepared : '+collectionName)
 					deferred.resolve(collection)
 				})
 			})
@@ -86,25 +87,24 @@ function fixture() {
 
 		run : function() {
 
-			var deferred = Q.defer();
+			var deferred = Q.defer()
 
 			db.open(function(err, db) {
 
 				if (process.env.NODE_ENV==='production') {
-					db.authenticate('nodejitsu_juergas', '8dubrcu32rnd5n3vatnndmp102', function (err, replies) {
-						// You are now connected and authenticated.
+					db.authenticate(config.mongo.user, config.mongo.password, function (err, replies) {
+						console.log('You are now connected and authenticated')
+						prepareCollection(db, 'users')
+						.then( function (value) { return prepareCollection(db, 'market') })
+						.then( function (value) { return prepareCollection(db, 'inventories') })
+						.then( function (value) { return prepareCollection(db, 'globalPositions') })
+						.then( function (value) { return prepareCollection(db, 'contracts') })
+						.fail( function (error) { deferred.reject() })
+						.done( function ()      { deferred.resolve() })
 					})
 				}
+			});
 
-				prepareCollection(db, 'users')
-				.then( function (value) { return prepareCollection(db, 'market') })
-				.then( function (value) { return prepareCollection(db, 'inventories') })
-				.then( function (value) { return prepareCollection(db, 'globalPositions') })
-				.then( function (value) { return prepareCollection(db, 'contracts') })
-				.fail( function (error) { deferred.reject() })
-				.done( function ()      { deferred.resolve() })
-			})
-		
 			return deferred.promise
 		}
 	}

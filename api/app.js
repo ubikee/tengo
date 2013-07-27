@@ -1,6 +1,7 @@
 var express = require('express')
 , util = require('util')
-, api = require('./api')
+, config = require('./config')()
+, api = require('./api')(config)
 
 var app = express()
 

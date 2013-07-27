@@ -18,7 +18,8 @@
         "mocha-as-promised":"1.2.1",
         "mocha": "1.8.1",
         "should": "1.2.1",
-        "assert": "0.4.9"
+        "assert": "0.4.9",
+        "tengo-bus" : "0.0.1"
     },
     "main": "api.js",
     "engines": {

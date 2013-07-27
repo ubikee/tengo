@@ -1,7 +1,7 @@
 var express = require('express')
 , cons = require('consolidate')
-
-var api = require('tengo-api')
+, config = require('../../config')()
+, api = require('tengo-api')(config)
 
 var app = module.exports = express()
 
