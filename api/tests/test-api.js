@@ -6,7 +6,7 @@ chai.use(chaiAsPromised)
 require('mocha-as-promised')()
 
 var config = require('./config')()
-, api = require('../api')(config)
+, API = require('../api')
 , fixture = require('./fixture')
 
 var user1 = { 
@@ -26,9 +26,18 @@ var product1 = {
 	'label' : 'Test Product'
 }
 
+var api = null;
+
 before(function (done) {
-	fixture.run().then(done)
+	// fixture.run().then(done)
+
+	API(config).then( function (value) {
+		api = value
+		done()
+	})
+
 })
+
 
 describe('API', function(){
 

@@ -9,9 +9,13 @@ chai.use(http);
 
 describe('API server', function() {
 
+	this.timeout(10000) 
+
+/*
 	before(function(done){
 		fixture.run().then(done)
 	})
+*/
 
 	it('should return 200 on success', function (done) {
 		chai.request(app).get('/').res( function (res) {

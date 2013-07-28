@@ -1,13 +1,11 @@
 var Q = require('q')
 , mongodb = require('mongodb')
 
-var api = function(config) {
-
-// TODO: re-think all the bus and db connection initialization
+var api = function(config, ready) {
 
 	var bus = require('tengo-bus')(config)
-	bus.connect(config)
-
+	//, reports = require('tengo.reports')(config.mongo)
+	
 	var db = new mongodb.Db(config.mongo.database, new mongodb.Server(config.mongo.server, config.mongo.port, {}), {safe:true})
 
 	db.open(function(err, db_p) {
@@ -22,13 +20,19 @@ var api = function(config) {
 		}
 	})
 
+
+	bus.connect(config.redis)  //.then(reports.connect(config.mongo)
+	.then(function (value) {
+		ready(null, API)
+	})
+
 	var users = require('./libs/users')(db)
  	, markets = require('./libs/markets')(db)
 	, contracts = require('./libs/contracts')(db)
 	, inventories = require('./libs/inventories')(db)
 	, globalPosition = require('./libs/global')(db)
 
-	return {
+	var API = {
 
 		user : { 
 			registry : function (user) {
@@ -82,4 +86,21 @@ var api = function(config) {
 	}
 }
 
-module.exports = api
+//module.exports = api
+
+module.exports = function (config) {
+
+	var deferred = Q.defer()
+
+	api(config, function (err, api) {
+
+		if (err)
+			deferred.reject()
+
+		console.log('API Ready')
+		
+		deferred.resolve(api)
+	})
+
+	return deferred.promise
+}
