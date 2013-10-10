@@ -1,4 +1,3 @@
-
 var express = require('express')
 , cons = require('consolidate')
 , flash = require('connect-flash')
@@ -6,8 +5,6 @@ var express = require('express')
 , LocalStrategy = require('passport-local').Strategy
 , config = require('../../config')()
 , api = require('tengo-api')(config)
-
-//var users = require('./users')()
 
 passport.use( new LocalStrategy(
 
@@ -52,6 +49,7 @@ passport.deserializeUser(function (id, done) {
 })
 
 var app = module.exports = express()
+
 app.engine('html', cons.swig)
 app.set('views', __dirname+'/html')
 app.set('view engine', 'html')

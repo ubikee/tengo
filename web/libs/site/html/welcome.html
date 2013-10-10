@@ -1,113 +1,92 @@
 <!DOCTYPE html>
 <html lang="eng">
 <head>
-	<title>Tengo</title>
+	<meta charset="utf-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<title>Tengo</title>
+
 	<link href="css/bootstrap.css" rel="stylesheet">
-	<style type="text/css">
-		body {
-			padding-top: 40px;
-			padding-bottom: 40px;
-			
-			background-image: url(img/background1.jpg); 
-			background-repeat: no-repeat; 
-			background-position: left top;
-			background-size: 100%;
-
-		}
-    </style>
-
-	<script src="/socket.io/socket.io.js"></script>
-	<script>
-
-	  var socket = io.connect('http://127.0.0.1:8000');
-	  
-	  socket.on('news', function (data) {
-	    console.log(data);
-	    socket.emit('my other event', { my: 'data' });
-	  });
-
-	</script>
-
-
-	<link href="css/bootstrap-responsive.css" rel="stylesheet">
+	<link href="css/tengo.css" rel="stylesheet">
 </head>
 <body>
 
-	<!-- navbar -->
 	<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container">
-				<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+		<div class="container">
+
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="brand" href="#">Tengo</a>
-				<div class="nav-collapse collapse">
-					<ul class="nav">
-						<li class="active"><a href="#">Home</a></li>
-						<li><a href="/documentation">Documentation</a></li>
-						<li><a href="/contact">Contact</a></li>
-					</ul>
-					{% if !user %}
-					<ul class="nav pull-right">
-						<li><a href="/login">Log in</a></li>
-						<li><a href="/signup">Sign up</a></li>
-					</ul>
-					{% else %}
-						<p>User : {{ user.nickname }}</p>
-					{% endif %}
-				</div>
+				<a class="navbar-brand" href="#">Tengo</a>
 			</div>
+
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Home</a></li>
+					<li><a href="/documentation">Documentation</a></li>
+					<li><a href="/contact">Contact</a></li>
+				</ul>
+				{% if !user %}
+				<ul class="nav nav-pills pull-right">
+					<li><a href="/login">Log in</a></li>
+					<li><a href="/signup">Sign up</a></li>
+				</ul>
+				{% else %}
+				<p>User : {{ user.nickname }}</p>
+				{% endif %}
+			</div>
+
 		</div>
 	</div>
 
-	<div class="container" >
-
-		<div class="hero-unit" >
+	<div class="jumbotron" style="background-image : url('/img/backgorund2.jpg')" >
+		<div class="container" >
 			<h1>Finances under control</h1>
 			<p>Control your money with Tengo!</p>
 			<p><a href="/signup" class="btn btn-primary btn-large">Sign UP !!! &raquo;</a></p>
 		</div>
+	</div>
 
-		<div class="row" style="margin-left : 0px">
-			<ul class="thumbnails">
-				<li class="span3">
+	<div class="container">
+
+		<div class="row">
+			<div class="col-lg-3">
 					<div class="thumbnail" style="background-color:white;">
 						<img src="img/glyphicons_059_cargo.png" style="margin-top:5px">
 						<h4 class="text-center">Inventory</h4>
 						<p>Know your posessions</p>
 						<p><a class="btn" href="#">View details &raquo;</a></p>
 					</div>
-				</li>
-				<li class="span3">
+			</div>
+			<div class="col-lg-3">
 					<div class="thumbnail" style="background-color:white;">
 						<img src="img/glyphicons_341_briefcase.png" style="margin-top:5px">
 						<h4 class="text-center">Contracts</h4>
 						<p>Be aware of your compromises!</p>
 						<p><a class="btn" href="#">View details &raquo;</a></p>
 					</div>
-				</li>
-				<li class="span3">
+			</div>
+			<div class="col-lg-3">
 					<div class="thumbnail" style="background-color:white;">
 						<img src="img/glyphicons_040_stats.png" style="margin-top:5px">
 						<h4 class="text-center">Statistics</h4>
 						<p>Obtain your reports just in time!</p>
 						<p><a class="btn" href="#">View details &raquo;</a></p>
 					</div>
-				</li>
-				<li class="span3">
+			</div>
+			<div class="col-lg-3">
 					<div class="thumbnail" style="background-color:white;">
 						<img src="img/glyphicons_078_warning_sign.png" style="margin-top:5px">
 						<h4 class="text-center">Notifications</h4>
 						<p>Program your personal alerts!</p>
 						<p><a class="btn" href="#">View details &raquo;</a></p>
 					</div>
-				</li>
-			</ul>
+			</div>
 		</div>
-
+		
 		<hr>
 
 		<footer>
@@ -117,17 +96,6 @@
 	</div> <!-- /container -->
 	
 	<script src="http://code.jquery.com/jquery.js"></script>
-	<script src="js/bootstrap-transition.js"></script>
-	<script src="js/bootstrap-alert.js"></script>
-	<script src="js/bootstrap-modal.js"></script>
-	<script src="js/bootstrap-dropdown.js"></script>
-	<script src="js/bootstrap-scrollspy.js"></script>
-	<script src="js/bootstrap-tab.js"></script>
-	<script src="js/bootstrap-tooltip.js"></script>
-	<script src="js/bootstrap-popover.js"></script>
-	<script src="js/bootstrap-button.js"></script>
-	<script src="js/bootstrap-collapse.js"></script>
-	<script src="js/bootstrap-carousel.js"></script>
-	<script src="js/bootstrap-typeahead.js"></script>	
+	<script src="js/bootstrap.js"></script>
 </body>
 </html>
