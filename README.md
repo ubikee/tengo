@@ -27,7 +27,7 @@ Following CQRS "design patterns".
 - tizen *
 - core-java (deprecated java previous POC)
 
-(*) not implemented yet
+(*) not implemented yet...
 
 
 
